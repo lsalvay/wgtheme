@@ -7,13 +7,13 @@ $has_footer_4 = is_active_sidebar( 'footer4' );
 
 if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
-<aside class="footer-widgets mt-4">
+<aside class="footer-widgets mt-4 py-4">
 
     <div class="row">
 
         <?php if ( $has_footer_1 ) { ?>
 
-            <div class="col widget-col-1">
+            <div class="col widget-col-1 text-center">
                 <?php dynamic_sidebar( 'footer1' ); ?>
             </div>
 
@@ -21,7 +21,7 @@ if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
         <?php if ( $has_footer_2 ) { ?>
 
-            <div class="col widget-col-2">
+            <div class="col widget-col-2 text-center">
                 <?php dynamic_sidebar( 'footer2' ); ?>
             </div>
 
@@ -29,7 +29,7 @@ if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
         <?php if ( $has_footer_3 ) { ?>
 
-            <div class="col widget-col-3">
+            <div class="col widget-col-3 text-center">
                 <?php dynamic_sidebar( 'footer3' ); ?>
             </div>
 
@@ -37,7 +37,7 @@ if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
         <?php if ( $has_footer_4 ) { ?>
 
-            <div class="col widget-col-4">
+            <div class="col widget-col-4 text-center">
                 <?php dynamic_sidebar( 'footer4' ); ?>
             </div>
 
