@@ -49,6 +49,8 @@ function clase_menu_invento ($atts, $item, $args) {
 }
 
 
+// Add custom options
+
 function customize_wgtheme ( $wp_customize ) {
 
   $wp_customize -> add_setting('wg_link_color', array(
@@ -74,6 +76,8 @@ function customize_wgtheme ( $wp_customize ) {
 } 
 add_action('customize_register', 'customize_wgtheme');
 
+
+
 // Output Customize CSS
 function wg_customize_css(){
   ?>
@@ -86,6 +90,74 @@ function wg_customize_css(){
   <?php
 }
 add_action('wp_head', 'wg_customize_css');
+
+
+// Add Our Widget Locations
+
+add_action( 'widgets_init', 'wg_register_sidebars' );
+function wg_register_sidebars() {
+    /* Register the 'primary' sidebar. */
+    register_sidebar(
+        array(
+            'id'            => 'blog',
+            'name'          => __( 'Blog Sidebar' ),
+            'description'   => __( 'Este Sidebar aparece en la pagina de blog.' ),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        )
+    );
+
+    register_sidebar(
+      array(
+          'id'            => 'footer1',
+          'name'          => __( 'Footer 1' ),
+          'description'   => __( 'Este Sidebar aparece en la primera posicion del footer.' ),
+          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'after_widget'  => '</div>',
+          'before_title'  => '<h3 class="widget-title">',
+          'after_title'   => '</h3>',
+      )
+  );
+    
+    register_sidebar(
+      array(
+          'id'            => 'footer2',
+          'name'          => __( 'Footer 2' ),
+          'description'   => __( 'Este Sidebar aparece en la segunda posicion del footer.' ),
+          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'after_widget'  => '</div>',
+          'before_title'  => '<h3 class="widget-title">',
+          'after_title'   => '</h3>',
+      )
+  );
+    
+  register_sidebar(
+    array(
+        'id'            => 'footer3',
+        'name'          => __( 'Footer 3' ),
+        'description'   => __( 'Este Sidebar aparece en la tercera posicion del footer.' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    )
+);
+
+register_sidebar(
+  array(
+      'id'            => 'footer4',
+      'name'          => __( 'Footer 4' ),
+      'description'   => __( 'Este Sidebar aparece en la cuarta posicion del footer.' ),
+      'before_widget' => '<div id="%1$s" class="widget %2$s">',
+      'after_widget'  => '</div>',
+      'before_title'  => '<h3 class="widget-title">',
+      'after_title'   => '</h3>',
+  )
+);
+
+}
 
 ?>
 

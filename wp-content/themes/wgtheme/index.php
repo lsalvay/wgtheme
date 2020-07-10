@@ -1,7 +1,11 @@
-    <?php get_header(); ?>
-
-    <h1>Hello, world!</h1>
-    <button class="btn btn-primary">Boton</button>
+<?php get_header(); ?>
     
-
-    <?php get_footer(); ?>
+<div class="container">
+    <h1>Hello, world!</h1>
+        <button class="btn btn-primary">Boton</button>
+    
+    <?php get_template_part( 'template-parts/footer-widgets' ); ?>
+    
+</div>
+    
+<?php get_footer(); ?>
