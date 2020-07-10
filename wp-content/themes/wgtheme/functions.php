@@ -38,7 +38,7 @@ function add_theme_scripts() {
   add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
   
 
-// add class to <a> menu  
+// add class to <a> menu  bootstrap
 
 add_filter('nav_menu_link_attributes', 'clase_menu_invento', 10, 3);
 
@@ -47,6 +47,45 @@ function clase_menu_invento ($atts, $item, $args) {
     $atts['class'] = $class;
     return $atts;
 }
+
+
+function customize_wgtheme ( $wp_customize ) {
+
+  $wp_customize -> add_setting('wg_link_color', array(
+    'default' => '#000',
+    'transport' => 'refresh',
+  ));
+
+  $wp_customize -> add_section('wg_standard_colors', array(
+
+    'title' => __('Standard Colors', 'wgtheme'),
+    'priority' => 30,
+  ));
+
+  $wp_customize -> add_control(new WP_Customize_Color_Control( $wp_customize, 'wg_link_color_control', array(
+
+    'label' => __('Link Color', 'wgtheme'),
+    'section' => 'wg_standard_colors',
+    'settings' => 'wg_link_color',
+
+  )));
+  
+
+} 
+add_action('customize_register', 'customize_wgtheme');
+
+// Output Customize CSS
+function wg_customize_css(){
+  ?>
+  <style type="text/css">
+    .btn-primary {
+      background-color: <?php echo get_theme_mod('wg_link_color'); ?>;
+    }
+  
+  </style>
+  <?php
+}
+add_action('wp_head', 'wg_customize_css');
 
 ?>
 
