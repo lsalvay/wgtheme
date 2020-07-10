@@ -10,26 +10,27 @@
     <title>Hello, world!</title>
   </head>
   <body>
-      <div class="container-fluid bg-dark">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">
-                    <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top bg-light" alt="" loading="lazy">
-                    Bootstrap
-                </a>
-                <?php 
-                    if ( has_nav_menu( 'primary' ) ) {
-                        wp_nav_menu (array (
-                            'theme_location' => 'primary',
-                            'container' => 'div',
-                            'container_class' => 'colapse navbar-colapse',
-                            'container_id' => 'navbarSupportedContent',
-                            'items_wrap' => '<ul class="navbar-nav text-center">%3$s</ul>',
-                            'menu_class' => 'nav-item'
-                        )); 
-                    }
-                ?>
-                
+        <div class="container-fluid bg-dark">
+            <nav class="navbar navbar-expand-md navbar-dark" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'your-theme-slug' ); ?>">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <?php
+                    wp_nav_menu( array(
+                        'theme_location'    => 'primary',
+                        'depth'             => 2,
+                        'container'         => 'div',
+                        'container_class'   => 'collapse navbar-collapse',
+                        'container_id'      => 'bs-example-navbar-collapse-1',
+                        'menu_class'        => 'navbar-nav ml-auto',
+                        'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                        'walker'            => new WP_Bootstrap_Navwalker(),
+                    ) );
+                    ?>
                 </div>
             </nav>
-      </div>
+        </div>
     
