@@ -22,6 +22,7 @@
 /wp-blog-header.php
 /wp-comments-post.php
 .htaccess
+/.vscode/*
 
 
 !/wp-content/languages/wgtheme
