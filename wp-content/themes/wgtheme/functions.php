@@ -18,6 +18,21 @@ function wgtheme_menus() {
 
 add_action( 'init', 'wgtheme_menus' );
 
+/**
+ * Register Custom Navigation Walker
+ */
+function register_navwalker(){
+
+  if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
+    // File does not exist... return an error.
+    return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
+  } else {
+    // File exists... require it.
+    require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+  }
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
+
 
 /**
  * Register scripts and styles
@@ -37,16 +52,6 @@ function add_theme_scripts() {
   }
   add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
   
-
-// add class to <a> menu  bootstrap
-
-add_filter('nav_menu_link_attributes', 'clase_menu_invento', 10, 3);
-
-function clase_menu_invento ($atts, $item, $args) {
-    $class = 'nav-link';
-    $atts['class'] = $class;
-    return $atts;
-}
 
 
 // Add custom options
@@ -96,8 +101,8 @@ add_action('wp_head', 'wg_customize_css');
 
 add_action( 'widgets_init', 'wg_register_sidebars' );
 function wg_register_sidebars() {
-    /* Register the 'primary' sidebar. */
-    register_sidebar(
+  
+  register_sidebar(
         array(
             'id'            => 'blog',
             'name'          => __( 'Blog Sidebar' ),
@@ -107,9 +112,9 @@ function wg_register_sidebars() {
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
         )
-    );
+  );
 
-    register_sidebar(
+  register_sidebar(
       array(
           'id'            => 'footer1',
           'name'          => __( 'Footer 1' ),
@@ -121,7 +126,7 @@ function wg_register_sidebars() {
       )
   );
     
-    register_sidebar(
+  register_sidebar(
       array(
           'id'            => 'footer2',
           'name'          => __( 'Footer 2' ),
@@ -134,28 +139,28 @@ function wg_register_sidebars() {
   );
     
   register_sidebar(
-    array(
-        'id'            => 'footer3',
-        'name'          => __( 'Footer 3' ),
-        'description'   => __( 'Este Sidebar aparece en la tercera posicion del footer.' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    )
-);
+      array(
+          'id'            => 'footer3',
+          'name'          => __( 'Footer 3' ),
+          'description'   => __( 'Este Sidebar aparece en la tercera posicion del footer.' ),
+          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'after_widget'  => '</div>',
+          'before_title'  => '<h3 class="widget-title">',
+          'after_title'   => '</h3>',
+      )
+  );
 
-register_sidebar(
-  array(
-      'id'            => 'footer4',
-      'name'          => __( 'Footer 4' ),
-      'description'   => __( 'Este Sidebar aparece en la cuarta posicion del footer.' ),
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h3 class="widget-title">',
-      'after_title'   => '</h3>',
-  )
-);
+  register_sidebar(
+      array(
+          'id'            => 'footer4',
+          'name'          => __( 'Footer 4' ),
+          'description'   => __( 'Este Sidebar aparece en la cuarta posicion del footer.' ),
+          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'after_widget'  => '</div>',
+          'before_title'  => '<h3 class="widget-title">',
+          'after_title'   => '</h3>',
+      )
+  );
 
 }
 
