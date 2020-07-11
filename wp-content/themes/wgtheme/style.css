@@ -14,3 +14,7 @@ Tags: bootstrap, profesional
     color: #fff;
 }
 
+.content-blog a:link {
+    text-decoration: none;
+}
+
