@@ -1,13 +1,13 @@
 <?php get_header(); ?>
     
-<div class="container">
+
     <div class="contenido">
     <?php
 
         if ( have_posts() ) {
             if ( get_post_type( get_the_ID() ) == 'post' ) {
             ?>
-                <div class="content-blog my-2">
+                <div class="container content-blog my-2">
                     <div class="row row-cols-1 row-cols-md-2">
             <?php  
                 while ( have_posts() ) {
@@ -39,7 +39,6 @@
 
     ?>
     </div>
-</div>
 <?php get_template_part( 'template-parts/footer-widgets' ); ?>
     
 <?php get_footer(); ?>
