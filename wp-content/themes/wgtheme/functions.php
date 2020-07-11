@@ -176,5 +176,99 @@ if ( function_exists( 'add_theme_support' ) ) {
   add_image_size( 'post-thumb', 538, 250, true ); // 300 pixels wide (and unlimited height)
 }
 
+
+//--------------theme options ----------------
+
+add_action("admin_menu", "wgtheme_options");
+
+function wgtheme_options(){
+  add_menu_page(
+    "theme-options",    // page title
+    "WG Options",    // Menu title
+    "manage_options",   // capability
+    "theme-options",    // menu slug
+    "wgtheme_options_show", // callback function
+    "dashicons-sticky"  // icon
+  );
+}
+
+//this function show the options
+function wgtheme_options_show(){
+  ?>
+    <div>
+      <form action="options.php" method="post">
+         <?php
+          settings_fields("section");
+          do_settings_sections("theme-options");
+          submit_button();
+         ?>
+      </form>
+    </div>  
+  <?php
+}
+
+function wgtheme_options_setting() {
+
+  //Step 1
+  add_settings_section(
+    "section",  // id of settings
+    "Primera Sección", // title
+    null,         // callback function
+    "theme-options", // page
+  );
+
+  //Step 2
+  add_settings_field(
+    "creator_name",         //id
+    "Nombre de Creador",    //title
+    "display_creator_name", //callback
+    "theme-options",        //page
+    "section"               //section
+  );
+
+  add_settings_field(
+    "creator_url",         //id
+    "URL de Creador",    //title
+    "display_creator_url", //callback
+    "theme-options",        //page
+    "section"               //section
+  );
+
+  add_settings_field(
+    "creator_phone",         //id
+    "Teléfono de Creador",    //title
+    "display_creator_phone", //callback
+    "theme-options",        //page
+    "section"               //section
+  );
+
+  //Step 3
+  register_setting("section", "creator_name");
+  register_setting("section", "creator_url");
+  register_setting("section", "creator_phone");
+
+}
+
+add_action("admin_init", "wgtheme_options_setting");
+
+function display_creator_name() {
+  ?>
+    <input type="text" name="creator_name" value="<?php echo get_option('creator_name'); ?>" id="creator_name" />
+  <?php
+}
+
+function display_creator_url() {
+  ?>
+    <input type="text" name="creator_url" value="<?php echo get_option('creator_url'); ?>" id="creator_name" />
+  <?php
+}
+
+function display_creator_phone() {
+  ?>
+    <input type="text" name="creator_phone" value="<?php echo get_option('creator_phone'); ?>" id="creator_name" />
+  <?php
+}
+
+
 ?>
 
