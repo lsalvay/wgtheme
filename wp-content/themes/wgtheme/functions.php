@@ -90,6 +90,9 @@ function wg_customize_css(){
     .btn-primary {
       background-color: <?php echo get_theme_mod('wg_link_color'); ?>;
     }
+    .content-blog a:link {
+      color: <?php echo get_theme_mod('wg_link_color'); ?>;
+    }
   
   </style>
   <?php

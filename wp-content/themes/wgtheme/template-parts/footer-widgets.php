@@ -8,7 +8,7 @@ $has_footer_4 = is_active_sidebar( 'footer4' );
 if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
 <aside class="footer-widgets mt-4 py-4">
-
+<div class="container">
     <div class="row">
 
         <?php if ( $has_footer_1 ) { ?>
@@ -45,7 +45,7 @@ if ( $has_footer_1 || $has_footer_2 || $has_footer_3 || $has_footer_4 ) { ?>
 
 
     </div><!-- .row -->
-
+        </div>
 </aside><!-- .footer-widgets-->
 
 <?php } ?>
