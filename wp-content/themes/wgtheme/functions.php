@@ -167,5 +167,14 @@ function wg_register_sidebars() {
 
 }
 
+// Add image thumbnail
+
+if ( function_exists( 'add_theme_support' ) ) {
+  add_theme_support( 'post-thumbnails' );
+
+  // additional image sizes
+  add_image_size( 'post-thumb', 538, 250, true ); // 300 pixels wide (and unlimited height)
+}
+
 ?>
 
