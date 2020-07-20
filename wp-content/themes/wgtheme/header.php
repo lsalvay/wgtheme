@@ -7,10 +7,35 @@
     
     <?php wp_head(); ?>
 
-    <title>Hello, world!</title>
+    <title><?php echo get_option( 'blogname' ); ?></title>
   </head>
   <body>
-        <div class="container-fluid bg-dark">
+    <div class="top-bar py-2">
+        <div class="row">
+            <div class="col">
+                <?php echo get_option( 'top_phone' ); ?>
+            </div>
+            <div class="col">
+                <?php echo get_option( 'top_email' ); ?>
+            </div>
+            <div class="col">
+                <a href="<?php echo get_option( 'top_facebook' ); ?>"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <div class="col">
+                <a href="<?php echo get_option( 'top_instagram' ); ?>"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="col">
+                <a href="<?php echo get_option( 'top_youtube' ); ?>"><i class="fab fa-youtube"></i></a>
+                
+            </div>
+            <div class="col">
+                <a href="<?php echo get_option( 'top_linkedin' ); ?>"><i class="fab fa-linkedin-in"></i></a>
+                
+            </div>
+        </div>
+    
+    </div>
+        <div class="container-fluid bg-menu-nav py-2">
             <nav class="navbar navbar-expand-md navbar-dark" role="navigation">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
