@@ -42,10 +42,13 @@ function add_theme_scripts() {
     wp_enqueue_style( 'style', get_stylesheet_uri() );
    
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/includes/bootstrap/css/bootstrap.min.css', array(), '1.1', 'all');
+    wp_enqueue_style( 'main', get_template_directory_uri() . '/css/main.css', array(), '1.1', 'all');
+    wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/includes/fontawesome/css/all.min.css', array(), '1.1', 'all');
    
     wp_enqueue_script( 'popper', get_template_directory_uri() . '/includes/popper/popper.min.js', array (), 1.1, true);
     wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/includes/bootstrap/js/bootstrap.min.js', array ( 'jquery' ), 1.1, true);
-   
+    wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array (), 1.1, true);
+
       if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
       }
@@ -177,32 +180,61 @@ if ( function_exists( 'add_theme_support' ) ) {
 }
 
 
-//--------------theme options ----------------
+//--------------WG theme options ----------------
 
 add_action("admin_menu", "wgtheme_options");
 
 function wgtheme_options(){
   add_menu_page(
-    "theme-options",    // page title
+    "Theme Options",    // page title
     "WG Options",    // Menu title
     "manage_options",   // capability
-    "theme-options",    // menu slug
-    "wgtheme_options_show", // callback function
+    "theme_options",    // menu slug
+    "wgtheme_options_page", // callback function
     "dashicons-sticky"  // icon
   );
+
+  add_submenu_page(
+    "theme_options",
+    "General",
+    "General",
+    "manage_options",
+    "theme_options",
+    "wgtheme_options_page",
+    null,
+  );
+
+  add_submenu_page(
+    "theme_options",
+    "Settings",
+    "Settings",
+    "manage_options",
+    "theme_options_settings",
+    "wgtheme_options_page_settings",
+    null,
+  );
+
 }
 
 //this function show the options
-function wgtheme_options_show(){
+function wgtheme_options_page(){
   ?>
     <div>
       <form action="options.php" method="post">
          <?php
           settings_fields("section");
-          do_settings_sections("theme-options");
+          do_settings_sections("theme_options");
           submit_button();
          ?>
       </form>
+    </div>  
+  <?php
+}
+
+function wgtheme_options_page_settings(){
+  ?>
+    <div>
+      
     </div>  
   <?php
 }
@@ -212,60 +244,113 @@ function wgtheme_options_setting() {
   //Step 1
   add_settings_section(
     "section",  // id of settings
-    "Primera Sección", // title
+    "Top Bar", // title
     null,         // callback function
-    "theme-options", // page
+    "theme_options", // page
+  );
+  add_settings_section(
+    "social-section",  // id of settings
+    "Redes", // title
+    null,         // callback function
+    "theme_options", // page
   );
 
   //Step 2
   add_settings_field(
-    "creator_name",         //id
-    "Nombre de Creador",    //title
-    "display_creator_name", //callback
-    "theme-options",        //page
+    "top_phone",         //id
+    "Teléfono",    //title
+    "display_top_phone", //callback
+    "theme_options",        //page
     "section"               //section
   );
 
   add_settings_field(
-    "creator_url",         //id
-    "URL de Creador",    //title
-    "display_creator_url", //callback
-    "theme-options",        //page
+    "top_email",         //id
+    "email",    //title
+    "display_top_email", //callback
+    "theme_options",        //page
     "section"               //section
   );
 
+  // inputs social section
   add_settings_field(
-    "creator_phone",         //id
-    "Teléfono de Creador",    //title
-    "display_creator_phone", //callback
-    "theme-options",        //page
-    "section"               //section
+    "top_facebook",         //id
+    "Facebook Link",    //title
+    "display_top_facebook", //callback
+    "theme_options",        //page
+    "social-section"               //section
   );
+
+  add_settings_field(
+    "top_instagram",         //id
+    "Instagram Link",    //title
+    "display_top_instagram", //callback
+    "theme_options",        //page
+    "social-section"               //section
+  );
+
+  add_settings_field(
+    "top_youtube",         //id
+    "Youtube Link",    //title
+    "display_top_youtube", //callback
+    "theme_options",        //page
+    "social-section"               //section
+  );
+
+  add_settings_field(
+    "top_linkedin",         //id
+    "Linkedin Link",    //title
+    "display_top_linkedin", //callback
+    "theme_options",        //page
+    "social-section"               //section
+  );
+  
 
   //Step 3
-  register_setting("section", "creator_name");
-  register_setting("section", "creator_url");
-  register_setting("section", "creator_phone");
+  register_setting("section", "top_email");
+  register_setting("section", "top_phone");
+  register_setting("section", "top_facebook");
+  register_setting("section", "top_instagram");
+  register_setting("section", "top_youtube");
+  register_setting("section", "top_linkedin");
 
 }
 
 add_action("admin_init", "wgtheme_options_setting");
 
-function display_creator_name() {
+function display_top_facebook() {
   ?>
-    <input type="text" name="creator_name" value="<?php echo get_option('creator_name'); ?>" id="creator_name" />
+    <input type="text" name="top_facebook" value="<?php echo get_option('top_facebook'); ?>" id="top_facebook" />
   <?php
 }
 
-function display_creator_url() {
+function display_top_instagram() {
   ?>
-    <input type="text" name="creator_url" value="<?php echo get_option('creator_url'); ?>" id="creator_name" />
+    <input type="text" name="top_instagram" value="<?php echo get_option('top_instagram'); ?>" id="top_instagram" />
   <?php
 }
 
-function display_creator_phone() {
+function display_top_youtube() {
   ?>
-    <input type="text" name="creator_phone" value="<?php echo get_option('creator_phone'); ?>" id="creator_name" />
+    <input type="text" name="top_youtube" value="<?php echo get_option('top_youtube'); ?>" id="top_youtube" />
+  <?php
+}
+
+function display_top_linkedin() {
+  ?>
+    <input type="text" name="top_linkedin" value="<?php echo get_option('top_linkedin'); ?>" id="top_linkedin" />
+  <?php
+}
+
+function display_top_email() {
+  ?>
+    <input type="text" name="top_email" value="<?php echo get_option('top_email'); ?>" id="top_email" />
+  <?php
+}
+
+function display_top_phone() {
+  ?>
+    <input type="text" name="top_phone" value="<?php echo get_option('top_phone'); ?>" id="top_name" />
   <?php
 }
 
